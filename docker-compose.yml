@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  qq:
+    build: 
+      context: .
+      args:
+        USER_ID: ${USER_ID}
+    environment:
+      - XMODIFIERS="@im=fcitx"
+      - DBUS_SESSION_BUS_ADDRESS=unix:path=${USER_DBUS_SESSION_BUS_ADDRESS}
+      - PULSE_SERVER=unix:${USER_PULSE_SERVER}
+      - DISPLAY
+      - XAUTHORITY=/home/user/.Xauthority
+    volumes:
+      - "${USER_HOME}/.Xauthority:/home/user/.Xauthority:ro"
+      - /tmp/.X11-unix/:/tmp/.X11-unix/
+      - "${USER_DBUS_SESSION_BUS_ADDRESS}:${USER_DBUS_SESSION_BUS_ADDRESS}"
+      - "${USER_PULSE_SERVER}:${USER_PULSE_SERVER}"
+      - "./QQ/:/home/user/.config/QQ/"
+      - "./shared/:/home/user/shared/"
+    hostname: ${HOSTNAME}
+    command: 'tencent-qq'
+    devices:
+      - /dev/dri/card0
