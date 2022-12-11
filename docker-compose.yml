@@ -21,5 +21,6 @@ services:
       - "./shared/:/home/user/shared/"
     hostname: ${HOSTNAME}
     command: 'tencent-qq'
+    shm_size: 2gb
     devices:
       - /dev/dri/card0
