@@ -10,7 +10,10 @@ RUN pacman --noconfirm -Sy archlinux-keyring && \
     pacman -Scc --noconfirm
 
 ARG USER_ID
+ARG TIMEZONE
+
 RUN env && useradd -m user -u ${USER_ID}
+RUN ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
 
 USER user
 RUN cd && \

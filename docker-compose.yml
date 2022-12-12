@@ -6,6 +6,7 @@ services:
       context: .
       args:
         USER_ID: ${USER_ID}
+        TIMEZONE: ${TIMEZONE}
     environment:
       - XMODIFIERS="@im=fcitx"
       - DBUS_SESSION_BUS_ADDRESS=unix:path=${USER_DBUS_SESSION_BUS_ADDRESS}
