@@ -22,7 +22,7 @@ docker-compose up -d
 
 1. 客户端仍然在内测当中, 需要内测资格.
 2. 截图功能不正常, 实现在 /opt/QQ/resources/app/screencast.gjs, 通过 dbus 调用 org.gnome.Shell.Screencast 来截图. 目前可以通过在宿主机上截图, 通过剪贴板粘贴来 workaround.
-3. 输入法在粘贴图片后小概率失效, 无法稳定复现. 可以通过切换聊天窗口来恢复.
+3. 输入法在粘贴图片后小概率失效, 无法稳定复现. 可以通过切换聊天窗口来恢复. 类似的还有在输入法中输入 `session` 可以稳定触发 bug.
 4. 只在 archlinux + i3wm 上进行过测试.
 5. 无法拖动传文件, 未来可以通过软链接容器内 shared 文件夹到一个与宿主机 shared 文件夹路径相同的文件夹来解决.
 6. QQ 邮箱无法打开, 之后可以考虑自己实现一个 xdg-open, 将目标 url 带出来.

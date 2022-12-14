@@ -8,7 +8,9 @@ services:
         USER_ID: ${USER_ID}
         TIMEZONE: ${TIMEZONE}
     environment:
-      - XMODIFIERS="@im=fcitx"
+      - LANG=zh_CN.UTF-8
+      - GTK_IM_MODULE=fcitx
+      - XMODIFIERS=@im=fcitx
       - DBUS_SESSION_BUS_ADDRESS=unix:path=${USER_DBUS_SESSION_BUS_ADDRESS}
       - PULSE_SERVER=unix:${USER_PULSE_SERVER}
       - DISPLAY
@@ -16,6 +18,7 @@ services:
     volumes:
       - "${USER_HOME}/.Xauthority:/home/user/.Xauthority:ro"
       - /tmp/.X11-unix/:/tmp/.X11-unix/
+      # - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
       - "${USER_DBUS_SESSION_BUS_ADDRESS}:${USER_DBUS_SESSION_BUS_ADDRESS}"
       - "${USER_PULSE_SERVER}:${USER_PULSE_SERVER}"
       - "./QQ/:/home/user/.config/QQ/"
