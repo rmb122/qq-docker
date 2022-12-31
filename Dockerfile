@@ -17,12 +17,12 @@ RUN ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
 
 USER user
 RUN cd && \
-    git clone https://aur.archlinux.org/linuxqq-new.git && \
-    cd linuxqq-new && \
+    git clone https://aur.archlinux.org/linuxqq.git && \
+    cd linuxqq && \
     makepkg
 
 USER root
-RUN pacman --noconfirm -U /home/user/linuxqq-new/linuxqq-new-*.pkg.tar.zst
+RUN pacman --noconfirm -U /home/user/linuxqq/linuxqq-*.pkg.tar.zst
 
 USER user
-RUN rm -rf ~/linuxqq-new && mkdir -p ~/.config/QQ
+RUN rm -rf ~/linuxqq && mkdir -p ~/.config/QQ

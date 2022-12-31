@@ -24,7 +24,7 @@ services:
       - "./QQ/:/home/user/.config/QQ/"
       - "./shared/:/home/user/shared/"
     hostname: ${HOSTNAME}
-    command: 'tencent-qq'
+    command: 'linuxqq'
     shm_size: 2gb
     devices:
       - /dev/dri/card0
