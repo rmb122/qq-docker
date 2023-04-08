@@ -16,16 +16,15 @@ docker-compose up -d
 
 需要注意的是, 目前输入法只支持 fcitx5. 同时如果需要播放声音, 则可能需要依赖 pulseaudio, 在这种情况下你需要在宿主机上安装 pulseaudio 或者兼容层 (例如: pipewire-pulse)
 
-另外, 第一次启动时 QQ 会尝试进行同步消息, 需要花费较多时间, 耐心等待即可, 不是 QQ 崩溃了.
+另外, 第一次启动时 QQ 会尝试进行同步消息, 整个窗口会卡住无法互动. 需要花费较多时间耐心等待, 不是 QQ 崩溃了.
 
 ## 目前存在的问题
 
-1. 客户端仍然在内测当中, 需要内测资格.
-2. 截图功能不正常, 实现在 /opt/QQ/resources/app/screencast.gjs, 通过 dbus 调用 org.gnome.Shell.Screencast 来截图. 目前可以通过在宿主机上截图, 通过剪贴板粘贴来 workaround.
-3. 输入法在粘贴图片后小概率失效, 无法稳定复现. 可以通过切换聊天窗口来恢复. 类似的还有在输入法中输入 `session` 可以稳定触发 bug.
-4. 只在 archlinux + i3wm 上进行过测试.
-5. 无法拖动传文件, 未来可以通过软链接容器内 shared 文件夹到一个与宿主机 shared 文件夹路径相同的文件夹来解决.
-6. QQ 邮箱无法打开, 之后可以考虑自己实现一个 xdg-open, 将目标 url 带出来.
+1. 截图功能不正常, 实现在 /opt/QQ/resources/app/screencast.gjs, 通过 dbus 调用 org.gnome.Shell.Screencast 来截图. 目前可以通过在宿主机上截图, 通过剪贴板粘贴来 workaround.
+2. 输入法在粘贴图片后小概率失效, 无法稳定复现. 可以通过切换聊天窗口来恢复. 类似的还有在输入法中输入 `session` 可以稳定触发 bug.
+3. 只在 archlinux + i3wm 上进行过测试.
+4. 无法拖动传文件, 未来可以通过软链接容器内 shared 文件夹到一个与宿主机 shared 文件夹路径相同的文件夹来解决.
+5. QQ 邮箱无法打开, 之后可以考虑自己实现一个 xdg-open, 将目标 url 带出来.
 
 ## i3 规则
 
