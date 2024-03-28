@@ -6,23 +6,29 @@ RUN pacman --noconfirm -Sy archlinux-keyring && \
     pacman-key --init && \
     pacman-key --populate archlinux && \
     pacman -Su --noconfirm && \
-    pacman -S --noconfirm vim xorg adobe-source-han-sans-cn-fonts noto-fonts-emoji git fakeroot binutils nss libxss gtk3 alsa-lib pulseaudio gjs libappindicator-gtk3 fcitx5-gtk xdg-utils libvips openjpeg2 && \
+    pacman -S --noconfirm debugedit vim xorg adobe-source-han-sans-cn-fonts noto-fonts-emoji git fakeroot binutils nss libxss gtk3 alsa-lib pulseaudio gjs libappindicator-gtk3 fcitx5-gtk xdg-utils libvips openjpeg2 && \
     pacman -Scc --noconfirm
 
-ARG USER_ID
 ARG TIMEZONE
+ARG USER_ID
 
-RUN env && useradd -m user -u ${USER_ID}
+RUN useradd -m user -u ${USER_ID}
 RUN ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
 
 USER user
+RUN mkdir /home/user/.config/
+COPY makepkg.conf /home/user/.config/pacman/makepkg.conf
+
 RUN cd && \
     git clone https://aur.archlinux.org/linuxqq.git && \
     cd linuxqq && \
-    makepkg
+    makepkg && \
+    mv ~/linuxqq/linuxqq-*.pkg.tar ~/linuxqq.pkg.tar && \
+    rm -r ~/linuxqq/
 
 USER root
-RUN pacman --noconfirm -U /home/user/linuxqq/linuxqq-*.pkg.tar.zst
+RUN pacman --noconfirm -U /home/user/linuxqq.pkg.tar
 
 USER user
-RUN rm -rf ~/linuxqq && mkdir -p ~/.config/QQ
+RUN mkdir -p ~/.config/QQ && mkdir -p ~/.config/shared/
+

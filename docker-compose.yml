@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   qq:
     build: 
@@ -16,15 +14,14 @@ services:
       - DISPLAY
       - XAUTHORITY=/home/user/.Xauthority
     volumes:
-      - "${USER_HOME}/.Xauthority:/home/user/.Xauthority:ro"
+      - "${XAUTHORITY}:/home/user/.Xauthority:ro"
       - /tmp/.X11-unix/:/tmp/.X11-unix/
-      # - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+      - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
       - "${USER_DBUS_SESSION_BUS_ADDRESS}:${USER_DBUS_SESSION_BUS_ADDRESS}"
       - "${USER_PULSE_SERVER}:${USER_PULSE_SERVER}"
       - "./QQ/:/home/user/.config/QQ/"
       - "./shared/:/home/user/shared/"
     hostname: ${HOSTNAME}
-    command: 'linuxqq'
+    command: 'linuxqq --no-sandbox'
     shm_size: 2gb
-    devices:
-      - /dev/dri/card0
+
